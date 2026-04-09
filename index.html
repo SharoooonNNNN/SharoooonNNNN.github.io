@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sharon Wang | Personal Homepage</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">PERSONAL HOMEPAGE</p>
+        <h1>Sharon Wang</h1>
+        <p class="intro">哈喽，我是 Sharon Wang，很高兴认识你，生命中的旅人。</p>
+        <div class="hero-tags">
+          <span class="tag-purple-1">侦探故事探险家</span>
+          <span class="tag-purple-2">同人重度爱好者</span>
+          <span class="tag-purple-3">旅行收藏家</span>
+          <span class="tag-purple-4">美食打卡家</span>
+        </div>
+
+        <section class="panel mbti-banner">
+          <div>
+            <p class="section-label">MBTI</p>
+            <h2>ENTP</h2>
+          </div>
+          <div class="mbti-copy">
+            <strong>N、T、P 均在 90% 以上的骨折眉</strong>
+            <p>喜欢新鲜想法，聊天经常越聊越发散，但总能在意想不到的地方找到乐趣。</p>
+          </div>
+        </section>
+      </div>
+
+      <div class="hero-art">
+        <div class="art-card">
+          <img src="ENTP.jpg" alt="Sharon 的 ENTP 图片" />
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="grid">
+        <article class="panel">
+          <p class="section-label">CHARACTER</p>
+          <h3>关键词</h3>
+          <ul class="stack-list">
+            <li>有趣，带一点反差感</li>
+            <li>喜欢安静，也喜欢探索</li>
+            <li>对细节敏感，对世界保持好奇</li>
+          </ul>
+        </article>
+
+        <article class="panel">
+          <p class="section-label">HOBBIES</p>
+          <h3>我喜欢的事</h3>
+          <p class="hint">点击任意卡片，查看更详细的介绍。</p>
+          <ul class="chip-list interactive-list">
+            <li><button class="hobby-card" type="button" data-title="Sleeping and eating" data-detail="No one can be alive without sleeping and eating." data-tone="tone-red">Sleeping and eating</button></li>
+            <li><button class="hobby-card" type="button" data-title="Manga and anime" data-detail="They're fantastic, aren't they? Let's discuss together and create a new world without pain and death." data-tone="tone-orange">Manga and anime</button></li>
+            <li><button class="hobby-card" type="button" data-title="Books and films" data-detail="Reading and Watching save me." data-tone="tone-yellow">Books and films</button></li>
+            <li><button class="hobby-card" type="button" data-title="Detetive stories" data-detail="Though Sherlock Holmes is my favorite detective, the author I like best is Edgar Allan Poe." data-tone="tone-green">Detetive stories</button></li>
+            <li><button class="hobby-card" type="button" data-title="Traveling" data-detail="Any place will be my destination!!!" data-tone="tone-cyan">Traveling</button></li>
+            <li><button class="hobby-card" type="button" data-title="Ancient Chinese history" data-detail="Especially Qin Dynasty" data-tone="tone-blue">Ancient Chinese history</button></li>
+          </ul>
+        </article>
+
+        <article class="panel">
+          <p class="section-label">VIBE</p>
+          <h3>一句话介绍自己</h3>
+          <p>“喜欢柔软的日常，也喜欢复杂的故事；能在旅途中找灵感，也能在一本书里待上一整天。”</p>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal" id="hobby-modal" aria-hidden="true">
+    <div class="modal-backdrop" data-close="true"></div>
+    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button class="modal-close" type="button" aria-label="关闭弹窗" data-close="true">×</button>
+      <p class="section-label">HOBBY DETAIL</p>
+      <h3 id="modal-title">Title</h3>
+      <p id="modal-detail">Detail</p>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById("hobby-modal");
+    const modalTitle = document.getElementById("modal-title");
+    const modalDetail = document.getElementById("modal-detail");
+    const hobbyButtons = document.querySelectorAll(".hobby-card");
+
+    function openModal(title, detail) {
+      modalTitle.textContent = title;
+      modalDetail.textContent = detail;
+      modal.classList.remove("tone-red", "tone-orange", "tone-yellow", "tone-green", "tone-cyan", "tone-blue");
+      modal.classList.add("is-open");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.classList.add("modal-open");
+    }
+
+    function closeModal() {
+      modal.classList.remove("is-open");
+      modal.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("modal-open");
+    }
+
+    hobbyButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        openModal(button.dataset.title, button.dataset.detail);
+        modal.classList.add(button.dataset.tone);
+      });
+    });
+
+    modal.addEventListener("click", (event) => {
+      if (event.target.dataset.close === "true") {
+        closeModal();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && modal.classList.contains("is-open")) {
+        closeModal();
+      }
+    });
+  </script>
+</body>
+</html>
